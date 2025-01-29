@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     //Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.ui.text.google.fonts)
     ksp(libs.hilt.compiler)
     ksp(libs.dagger.compiler)
     //Coil3

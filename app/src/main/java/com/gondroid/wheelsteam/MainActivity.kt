@@ -28,19 +28,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val shouldShowOnboarding = false
-
         enableEdgeToEdge()
         setContent {
             WheelsTeamTheme {
                 val navController = rememberNavController()
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    bottomBar = {
-                        BottomNavigationBar(
-                            navController
-                        )
-                    }
-
                 ) {
                     NavigationRoot(
                         shouldShowOnboarding = shouldShowOnboarding,
@@ -80,22 +73,5 @@ fun BottomNavigationBar(navController: NavHostController) {
                 }
             )
         }
-    }
-}
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WheelsTeamTheme {
-        Greeting("Android")
     }
 }
