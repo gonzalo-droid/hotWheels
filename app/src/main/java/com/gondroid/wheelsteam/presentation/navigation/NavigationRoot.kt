@@ -63,7 +63,13 @@ fun NavigationRoot(
                 )
             }
             composable<CollectionScreenRoute> {
-                CollectionScreenRoot()
+                CollectionScreenRoot(
+                    onNavigateUp = {
+                        navHostController.navigateUp()
+                    },
+                    onItemSelected = {
+                    }
+                )
             }
         }
     }
