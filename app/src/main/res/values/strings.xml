@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WheelsTeam</string>
+    <string name="filter_options">Filtrar</string>
+    <string name="year_collection">Año de la colección</string>
+    <string name="series">Series</string>
+    <string name="apply_filters">Aplicar filtros</string>
 </resources>
