@@ -7,6 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.gondroid.wheelsteam.presentation.CollectionScreenRoot
+import com.gondroid.wheelsteam.presentation.DetailScreenRoot
+import com.gondroid.wheelsteam.presentation.FavoriteScreenRoot
 import com.gondroid.wheelsteam.presentation.HomeScreenRoot
 import com.gondroid.wheelsteam.presentation.ProfileScreenRoot
 
@@ -24,10 +27,43 @@ fun NavigationRoot(
             startDestination = HomeScreenRoute //if (shouldShowOnboarding) "onboarding" else "home"
         ) {
             composable<HomeScreenRoute> {
-                HomeScreenRoot()
+                HomeScreenRoot(
+                    onNavigateToProfile = {
+                        navHostController.navigate(ProfileScreenRoute)
+                    },
+                    onItemSelected = {
+                        navHostController.navigate(DetailScreenRoute)
+                    }
+                )
             }
             composable<ProfileScreenRoute> {
-                ProfileScreenRoot()
+                ProfileScreenRoot(
+                    onNavigateToFavorite = {
+                        navHostController.navigate(FavoriteScreenRoute)
+                    },
+                    onNavigateToCollection = {
+                        navHostController.navigate(CollectionScreenRoute)
+                    },
+                    onNavigateUp = {
+                        navHostController.navigateUp()
+                    }
+                )
+            }
+            composable<DetailScreenRoute> {
+                DetailScreenRoot()
+            }
+            composable<FavoriteScreenRoute> {
+                FavoriteScreenRoot(
+                    onNavigateUp = {
+                        navHostController.navigateUp()
+                    },
+                    onItemSelected = {
+                        navHostController.navigate(DetailScreenRoute)
+                    }
+                )
+            }
+            composable<CollectionScreenRoute> {
+                CollectionScreenRoot()
             }
         }
     }

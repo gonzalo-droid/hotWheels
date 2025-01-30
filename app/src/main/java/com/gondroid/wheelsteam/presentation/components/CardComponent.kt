@@ -7,16 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,9 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,8 +34,11 @@ import com.gondroid.wheelsteam.presentation.model.Category
 import com.gondroid.wheelsteam.presentation.model.ItemCar
 import com.gondroid.wheelsteam.ui.theme.WheelsTeamTheme
 
+
 @Composable
-fun CardComponent(car: ItemCar, onNextClick: () -> Unit) {
+fun CardComponent(carItem: ItemCar, onItemSelected: () -> Unit) {
+
+    val iconFavorite: ImageVector = if(carItem.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder
 
     Box(
         modifier = Modifier
@@ -44,12 +46,14 @@ fun CardComponent(car: ItemCar, onNextClick: () -> Unit) {
             .height(200.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(Color.Black)
-            .clickable { }
+            .clickable {
+
+            }
     ) {
         // Imagen de fondo
         AsyncImage(
-            model = car.image,
-            contentDescription = car.name,
+            model = carItem.image,
+            contentDescription = carItem.name,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
@@ -58,7 +62,7 @@ fun CardComponent(car: ItemCar, onNextClick: () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .height(150.dp)
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(Color.Black.copy(alpha = 0.8f), Color.Transparent)
@@ -66,21 +70,37 @@ fun CardComponent(car: ItemCar, onNextClick: () -> Unit) {
                 )
         )
 
-        // Nombre del auto en la parte superior derecha
         Text(
-            text = car.name,
+            text = carItem.name,
             color = Color.White,
             fontSize = 18.sp,
+            maxLines = 3,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .align(Alignment.TopStart)
                 .padding(12.dp)
+                .width(200.dp)
+                .align(Alignment.TopStart)
         )
 
+        IconButton(
+            onClick = { },
+            modifier = Modifier
+                .padding(12.dp)
+                .align(Alignment.TopEnd),
+        ) {
+            Icon(
+                imageVector = iconFavorite,
+                contentDescription = "Favorite",
+                tint = Color.White,
+            )
+        }
 
-        IconButton(onClick = { }, modifier  = Modifier
-            .align(Alignment.BottomEnd)
-            .padding(12.dp),) {
+        IconButton(
+            onClick = { onItemSelected() },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(12.dp),
+        ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                 contentDescription = "Add Task",
@@ -94,14 +114,21 @@ fun CardComponent(car: ItemCar, onNextClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun CardComponentPreview() {
+    val context = LocalContext.current
+
+    // val drawable: Drawable =  context.resources.getDrawable(R.drawable.car_c)
+    // val imageUri: Uri = Uri.parse(("android.resource://" + context.getPackageName()).toString() + "/" + resId)
 
     WheelsTeamTheme {
-        CardComponent(car = ItemCar(
-            name = "Lamborghini Aventador",
-            description = "Un superdeportivo moderno con un motor V12 impresionante.",
-            image = "https://tse4.mm.bing.net/th?id=OIP.JugBMBp7ummagJNe8rvC0AHaD4&pid=Api",
-            code = "HW5002",
-            category = Category("Superdeportivos")
-        ), onNextClick = {})
+        CardComponent(
+            carItem = ItemCar(
+                name = "Lamborghini Aventador Full Edition 2025 ",
+                description = "Un superdeportivo moderno con un motor V12 impresionante.",
+                image = "https://tse4.mm.bing.net/th?id=OIP.JugBMBp7ummagJNe8rvC0AHaD4&pid=Api",
+                code = "HW5002",
+                category = Category("Superdeportivos")
+            ),
+            onItemSelected = {}
+        )
     }
 }
