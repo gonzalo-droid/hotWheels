@@ -11,7 +11,10 @@ import com.gondroid.wheelsteam.presentation.CollectionScreenRoot
 import com.gondroid.wheelsteam.presentation.DetailScreenRoot
 import com.gondroid.wheelsteam.presentation.FavoriteScreenRoot
 import com.gondroid.wheelsteam.presentation.HomeScreenRoot
+import com.gondroid.wheelsteam.presentation.LoginScreenRoot
 import com.gondroid.wheelsteam.presentation.ProfileScreenRoot
+import com.gondroid.wheelsteam.presentation.onboarding.Onboarding0neScreenRoot
+import com.gondroid.wheelsteam.presentation.onboarding.OnboardingTwoScreenRoot
 
 
 @Composable
@@ -24,8 +27,23 @@ fun NavigationRoot(
     ) {
         NavHost(
             navController = navHostController,
-            startDestination = HomeScreenRoute //if (shouldShowOnboarding) "onboarding" else "home"
+            startDestination = if (shouldShowOnboarding) Onboarding0neScreenRoute else LoginScreenRoute
         ) {
+            composable<Onboarding0neScreenRoute> {
+                Onboarding0neScreenRoot(
+                    onNavigateNext = {
+                        navHostController.navigate(LoginScreenRoute)
+                    },
+                    onSkip = {
+                        navHostController.navigate(LoginScreenRoute)
+                    }
+                )
+            }
+
+            composable<LoginScreenRoute> {
+                LoginScreenRoot()
+            }
+
             composable<HomeScreenRoute> {
                 HomeScreenRoot(
                     onNavigateToProfile = {

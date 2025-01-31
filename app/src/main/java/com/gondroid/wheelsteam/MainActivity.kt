@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val shouldShowOnboarding = false
+        val shouldShowOnboarding = true
         enableEdgeToEdge()
         setContent {
             WheelsTeamTheme {

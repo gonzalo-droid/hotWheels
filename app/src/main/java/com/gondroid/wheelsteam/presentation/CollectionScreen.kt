@@ -70,7 +70,7 @@ fun CollectionScreen(onNavigateUp: () -> Unit, onItemSelected: () -> Unit) {
             }
 
             items(collectionsCar) { item ->
-                CollectionComponent(item = item, onItemSelected = {})
+                CollectionComponent(item = item, onItemSelected = onItemSelected)
             }
 
         }
