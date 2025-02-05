@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "919783023506",
+    "project_id": "wheelsteam-cf9c5",
+    "storage_bucket": "wheelsteam-cf9c5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919783023506:android:d995452787408e5d80574b",
+        "android_client_info": {
+          "package_name": "com.gondroid.wheelsteam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC19-jCNJl340ijE4NlflQ0FrYRqUEiBZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

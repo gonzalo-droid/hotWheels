@@ -23,13 +23,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import com.gondroid.wheelsteam.presentation.model.Category
 import com.gondroid.wheelsteam.presentation.model.ItemCar
 import com.gondroid.wheelsteam.ui.theme.WheelsTeamTheme
@@ -38,7 +35,8 @@ import com.gondroid.wheelsteam.ui.theme.WheelsTeamTheme
 @Composable
 fun CardComponent(carItem: ItemCar, onItemSelected: () -> Unit) {
 
-    val iconFavorite: ImageVector = if(carItem.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder
+    val iconFavorite: ImageVector =
+        if (carItem.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder
 
     Box(
         modifier = Modifier
@@ -51,11 +49,10 @@ fun CardComponent(carItem: ItemCar, onItemSelected: () -> Unit) {
             }
     ) {
         // Imagen de fondo
-        AsyncImage(
-            model = carItem.image,
-            contentDescription = carItem.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+
+        ImageLoadComponent(
+            modifier = Modifier.fillMaxSize(),
+            urlImage = carItem.image
         )
 
         // Gradiente en la parte superior
@@ -110,15 +107,9 @@ fun CardComponent(carItem: ItemCar, onItemSelected: () -> Unit) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun CardComponentPreview() {
-    val context = LocalContext.current
-
-    // val drawable: Drawable =  context.resources.getDrawable(R.drawable.car_c)
-    // val imageUri: Uri = Uri.parse(("android.resource://" + context.getPackageName()).toString() + "/" + resId)
-
     WheelsTeamTheme {
         CardComponent(
             carItem = ItemCar(

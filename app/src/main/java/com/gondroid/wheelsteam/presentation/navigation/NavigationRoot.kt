@@ -14,7 +14,6 @@ import com.gondroid.wheelsteam.presentation.HomeScreenRoot
 import com.gondroid.wheelsteam.presentation.LoginScreenRoot
 import com.gondroid.wheelsteam.presentation.ProfileScreenRoot
 import com.gondroid.wheelsteam.presentation.onboarding.Onboarding0neScreenRoot
-import com.gondroid.wheelsteam.presentation.onboarding.OnboardingTwoScreenRoot
 
 
 @Composable
@@ -27,15 +26,15 @@ fun NavigationRoot(
     ) {
         NavHost(
             navController = navHostController,
-            startDestination = if (shouldShowOnboarding) Onboarding0neScreenRoute else LoginScreenRoute
+            startDestination = if (false) Onboarding0neScreenRoute else HomeScreenRoute
         ) {
             composable<Onboarding0neScreenRoute> {
                 Onboarding0neScreenRoot(
                     onNavigateNext = {
-                        navHostController.navigate(LoginScreenRoute)
+                        navHostController.navigate(HomeScreenRoute)
                     },
                     onSkip = {
-                        navHostController.navigate(LoginScreenRoute)
+                        navHostController.navigate(HomeScreenRoute)
                     }
                 )
             }

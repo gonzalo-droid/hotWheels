@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -58,7 +59,7 @@ dependencies {
 
     // Material 3
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material:1.7.5")
+    implementation(libs.androidx.material)
     //Navigation Compose
     implementation(libs.androidx.navigation.compose)
     //Hilt
@@ -87,6 +88,9 @@ dependencies {
     ksp(libs.room.compiler)
     //Kotlinx Serialization
     implementation(libs.kotlinx.serialization.json)
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
